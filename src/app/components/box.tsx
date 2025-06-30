@@ -8,27 +8,36 @@ const leftTabs = [
     label: "ASPIRATION",
     content: {
       question:
-        "Does this person have a strong drive and aspiration to achieve at present? (this can change depending on what's happening in colleagues' lives)",
+        "Does this person have the aspiration to take on new and more complex roles / projects now? (this can change depending on what's happening in colleagues' lives)",
       looksLike: [
-        "A clear aspiration to grow",
-        "Persistence",
-        "Resilience",
-        "A vision to change beyond the status quo",
+        "Someone with high aspiration demonstrates:",
+        "A clear appetite to grow and invest in their development",
+        "A proactive approach to taking on new opportunities",
       ],
     },
   },
   {
     label: "AGILITY",
     content: {
-      question: "Agility question here...",
-      looksLike: ["Agility example 1", "Agility example 2"],
+      question: "Does this person have a strong level of intellectual and emotional ability?",
+      looksLike: [
+        "Someone with high ability demonstrates",
+        "Emotional capacity to navigate social situations, demonstrate empathy and build relationships",
+        "Intellectual ability is being able to understand and solve complex problems, and a vision to change beyond the status quo.",
+      ],
     },
   },
   {
     label: "ABILITY",
     content: {
-      question: "Ability question here...",
-      looksLike: ["Ability example 1", "Ability example 2"],
+      question:
+        "Does this person demonstrate curiosity, learn rapidly, adapt, and apply new knowledge or skills in unfamiliar situations?",
+      looksLike: [
+        "Someone with a high learning agility is",
+        "able to learn flexibly and rapidly, and",
+        "thrive in new, changing, or ambiguous environments, and",
+        "resilience to bounce back from failure or difficulty",
+      ],
     },
   },
 ];
@@ -37,15 +46,19 @@ const rightTabs = [
   {
     label: "DEVELOPING",
     content: {
-      meaning: "Developing meaning here...",
-      looksLike: ["Developing example 1", "Developing example 2"],
+      meaning: "Inconsistent performance.",
+      looksLike: [
+        "Inconsistent performance across the year",
+        "Some progress made against goals, while others not achieved",
+        "New to role and on a learning curve",
+        "Needs to develop the skills and capability to increase performance",
+      ],
     },
   },
   {
     label: "DELIVERING",
     content: {
-      meaning:
-        "Does this person have a strong drive and aspiration to achieve at present? (this can change depending on what's happening in colleagues' lives)",
+      meaning: "Meeting expectations.",
       looksLike: [
         "Consistent performance across the year",
         "Meets goals of the role, and contributes well",
@@ -57,32 +70,38 @@ const rightTabs = [
   {
     label: "EXCELLING",
     content: {
-      meaning: "Excelling meaning here...",
-      looksLike: ["Excelling example 1", "Excelling example 2"],
+      meaning: "Exceeding Expectations.",
+      looksLike: [
+        "Consistently exceeds the requirements of the role",
+        "Recognised for their significant contribution",
+        "Able to adapt goals and strategies to meet changing demands",
+        "Is focused toward sustained and meaningful results",
+      ],
     },
   },
 ];
 
 export default function Box() {
-  const [leftIndex, setLeftIndex] = useState(1); // AGILITY default
-  const [rightIndex, setRightIndex] = useState(1); // DELIVERING default
+  const [leftIndex, setLeftIndex] = useState(0); // AGILITY default
+  const [rightIndex, setRightIndex] = useState(0); // DELIVERING default
 
   const headerHeight = 220;
 
   return (
-    <div style={{ maxWidth: "1000px", margin: "0 auto", paddingTop: "40px" }}>
+    <div style={{ maxWidth: "1060px", minHeight: "820px", margin: "0 auto" }}>
       <div
         style={{
+          minHeight: "820px",
           position: "relative",
           display: "flex",
-          gap: "2rem",
+          gap: "20px",
           background: "linear-gradient(135deg, #0a2a2f 0%, #1a3c2f 100%)",
-          borderRadius: "20px",
-          padding: "2rem",
+          borderRadius: "10px",
+          padding: "35px 10px",
           color: "white",
           border: "1px dotted #6aff7f",
           zIndex: 1,
-          minHeight: "600px",
+
           boxSizing: "border-box",
         }}
       >
@@ -113,30 +132,32 @@ export default function Box() {
           }}
         >
           {/* Header area, aligned from the top */}
-          <div style={{ textAlign: "center", minHeight: headerHeight }}>
-            <h2 style={{ marginTop: 0 }}>Understanding Potential</h2>
-            <p>Potential is both static and ever-changing…</p>
-            <Image
-              src="/pot.svg"
-              alt="pot"
-              width={120}
-              height={120}
-              style={{ margin: "2rem auto" }}
-            />
+          <div style={{ textAlign: "center" }}>
+            <span
+              className="text-[24px] font-semibold text-white whitespace-nowrap"
+              style={{ marginTop: 0 }}
+            >
+              Understanding Potential
+            </span>
+            <p className="mt-2 text-[14px] font-normal">
+              Potential is both static and ever-changing…
+            </p>
+            <Image src="/pot.svg" alt="pot" width={300} height={120} style={{ margin: "0 auto" }} />
           </div>
           {/* Toggles with outline */}
           <div
             style={{
               display: "flex",
               justifyContent: "center",
-              gap: "1rem",
+              gap: "0px",
               margin: "1rem 0",
-              border: "2px solid #2e4d3a",
-              borderRadius: "24px",
+              border: "1px solid #40603E",
+              borderRadius: "50px",
               padding: "0.5rem",
               background: "#0f2327",
               alignSelf: "center",
               minWidth: 0,
+              fontSize: "14px",
             }}
           >
             {leftTabs.map((tab, i) => (
@@ -145,9 +166,10 @@ export default function Box() {
                 onClick={() => setLeftIndex(i)}
                 style={{
                   padding: "0.5rem 1.5rem",
-                  borderRadius: "20px",
-                  border: "none",
-                  background: i === leftIndex ? "#1a3c2f" : "transparent",
+                  borderRadius: "50px",
+
+                  background: i === leftIndex ? "rgba(255, 255, 255, 0.2)" : "transparent",
+                  border: i === leftIndex ? "1px solid #C2C2C2" : "transparent",
                   color: i === leftIndex ? "#fff" : "#aaa",
                   fontWeight: i === leftIndex ? "bold" : "normal",
                   cursor: "pointer",
@@ -161,30 +183,31 @@ export default function Box() {
           {/* Content in two columns with vertical divider */}
           <div
             style={{
-              background: "#112a2f",
-              borderRadius: "12px",
+              background: "#fff",
+              borderRadius: "10px",
               padding: "1rem",
               marginTop: "1rem",
               display: "flex",
               gap: "2rem",
               width: "100%",
               boxSizing: "border-box",
+              color: "#000",
             }}
           >
             <div
               style={{
                 flex: 1,
-                paddingRight: "1rem",
+                paddingRight: "15px",
                 borderRight: "1px dotted #2e4d3a",
                 boxSizing: "border-box",
               }}
             >
-              <strong>Questions</strong>
-              <p>{leftTabs[leftIndex].content.question}</p>
+              <strong className="text-[14px]">Questions</strong>
+              <p className="text-[14px] font-normal">{leftTabs[leftIndex].content.question}</p>
             </div>
-            <div style={{ flex: 1, paddingLeft: "1rem", boxSizing: "border-box" }}>
-              <strong>What it looks like</strong>
-              <ul>
+            <div style={{ flex: 1 }}>
+              <strong className="text-[14px] ml-[-10px]">What it looks like</strong>
+              <ul className="text-[14px] font-normal list-disc pl-[0px]">
                 {leftTabs[leftIndex].content.looksLike.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
@@ -206,17 +229,22 @@ export default function Box() {
         >
           {/* Header area, aligned from the top */}
           <div style={{ textAlign: "center", minHeight: headerHeight }}>
-            <h2 style={{ marginTop: 0 }}>Understanding Performance</h2>
-            <p>
+            <span
+              className="text-[24px] font-semibold text-white whitespace-nowrap"
+              style={{ marginTop: 0 }}
+            >
+              Understanding Performance
+            </span>
+            <p className="mt-2 mb-[70px] text-[14px] font-normal">
               Performance considers results against current goals, as a measure of delivery over a
               period of time…
             </p>
             <Image
               src="/perf.svg"
               alt="perf"
-              width={120}
+              width={450}
               height={120}
-              style={{ margin: "2rem auto" }}
+              style={{ margin: "20px auto 70px auto" }}
             />
           </div>
           {/* Toggles with outline */}
@@ -224,14 +252,15 @@ export default function Box() {
             style={{
               display: "flex",
               justifyContent: "center",
-              gap: "1rem",
+              gap: "0px",
               margin: "1rem 0",
-              border: "2px solid #2e4d3a",
-              borderRadius: "24px",
+              border: "1px solid #40603E",
+              borderRadius: "50px",
               padding: "0.5rem",
               background: "#0f2327",
               alignSelf: "center",
               minWidth: 0,
+              fontSize: "14px",
             }}
           >
             {rightTabs.map((tab, i) => (
@@ -240,9 +269,9 @@ export default function Box() {
                 onClick={() => setRightIndex(i)}
                 style={{
                   padding: "0.5rem 1.5rem",
-                  borderRadius: "20px",
-                  border: "none",
-                  background: i === rightIndex ? "#1a3c2f" : "transparent",
+                  borderRadius: "50px",
+                  background: i === rightIndex ? "rgba(255, 255, 255, 0.2)" : "transparent",
+                  border: i === rightIndex ? "1px solid #C2C2C2" : "transparent",
                   color: i === rightIndex ? "#fff" : "#aaa",
                   fontWeight: i === rightIndex ? "bold" : "normal",
                   cursor: "pointer",
@@ -256,30 +285,23 @@ export default function Box() {
           {/* Content in two columns with vertical divider */}
           <div
             style={{
-              background: "#112a2f",
-              borderRadius: "12px",
+              background: "#fff",
+              borderRadius: "10px",
               padding: "1rem",
               marginTop: "1rem",
-              display: "flex",
-              gap: "2rem",
               width: "100%",
               boxSizing: "border-box",
+              display: "block", // stack vertically
+              color: "#000",
             }}
           >
-            <div
-              style={{
-                flex: 1,
-                paddingRight: "1rem",
-                borderRight: "1px dotted #2e4d3a",
-                boxSizing: "border-box",
-              }}
-            >
+            <div className="text-[14px] font-normal" style={{ marginBottom: "1.5rem" }}>
               <strong>What it means</strong>
               <p>{rightTabs[rightIndex].content.meaning}</p>
             </div>
-            <div style={{ flex: 1, paddingLeft: "1rem", boxSizing: "border-box" }}>
+            <div className="text-[14px] font-normal">
               <strong>What it looks like</strong>
-              <ul>
+              <ul className="text-[14px] font-normal list-disc pl-4">
                 {rightTabs[rightIndex].content.looksLike.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
