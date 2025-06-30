@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { X, ArrowUp, ArrowRight } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/app/components/button";
 import Image from "next/image";
 
