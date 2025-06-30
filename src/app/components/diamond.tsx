@@ -303,7 +303,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor }}
+                        style={{ "--hover-color": item.hoverColor } as any}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -329,7 +329,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor }}
+                        style={{ "--hover-color": item.hoverColor } as any}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -355,7 +355,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor }}
+                        style={{ "--hover-color": item.hoverColor } as any}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -383,7 +383,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor }}
+                        style={{ "--hover-color": item.hoverColor } as any}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -409,7 +409,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor }}
+                        style={{ "--hover-color": item.hoverColor } as any}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -435,7 +435,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor }}
+                        style={{ "--hover-color": item.hoverColor } as any}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -463,7 +463,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor }}
+                        style={{ "--hover-color": item.hoverColor } as any}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -489,7 +489,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor }}
+                        style={{ "--hover-color": item.hoverColor } as any}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -515,7 +515,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor }}
+                        style={{ "--hover-color": item.hoverColor } as any}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">

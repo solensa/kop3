@@ -67,52 +67,54 @@ export default function Box() {
   const [leftIndex, setLeftIndex] = useState(1); // AGILITY default
   const [rightIndex, setRightIndex] = useState(1); // DELIVERING default
 
-  // Height for the header area to align toggles
   const headerHeight = 220;
 
   return (
-    <div style={{ position: "relative", maxWidth: "1000px", margin: "0 auto", paddingTop: "40px" }}>
-      {/* Dotted green vertical line through the centre, extending above the box */}
+    <div style={{ maxWidth: "1000px", margin: "0 auto", paddingTop: "40px" }}>
       <div
         style={{
-          position: "absolute",
-          left: "50%",
-          top: 0,
-          transform: "translateX(-50%)",
-          height: "calc(100% + 60px)",
-          width: 0,
-          borderLeft: "3px dotted #6aff7f",
-          zIndex: 2,
-          pointerEvents: "none",
-        }}
-      />
-      {/* Dotted green border around the box */}
-      <div
-        style={{
+          position: "relative",
           display: "flex",
           gap: "2rem",
           background: "linear-gradient(135deg, #0a2a2f 0%, #1a3c2f 100%)",
           borderRadius: "20px",
           padding: "2rem",
           color: "white",
-          border: "3px dotted #6aff7f",
-          position: "relative",
-          zIndex: 3,
+          border: "1px dotted #6aff7f",
+          zIndex: 1,
+          minHeight: "600px",
+          boxSizing: "border-box",
         }}
       >
+        {/* Dotted green vertical line INSIDE the box, extends above */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "-30px", // extends above the box
+            bottom: 0,
+            transform: "translateX(-50%)",
+            width: 0,
+            borderLeft: "1px dotted #6aff7f",
+            zIndex: 2,
+            pointerEvents: "none",
+            height: "calc(100% + 30px)",
+          }}
+        />
         {/* Left Column */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          {/* Header area with fixed height for alignment */}
-          <div
-            style={{
-              textAlign: "center",
-              minHeight: headerHeight,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <h2>Understanding Potential</h2>
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            zIndex: 3,
+            padding: "0 10px",
+            boxSizing: "border-box",
+          }}
+        >
+          {/* Header area, aligned from the top */}
+          <div style={{ textAlign: "center", minHeight: headerHeight }}>
+            <h2 style={{ marginTop: 0 }}>Understanding Potential</h2>
             <p>Potential is both static and ever-changing…</p>
             <Image
               src="/pot.svg"
@@ -165,13 +167,22 @@ export default function Box() {
               marginTop: "1rem",
               display: "flex",
               gap: "2rem",
+              width: "100%",
+              boxSizing: "border-box",
             }}
           >
-            <div style={{ flex: 1, paddingRight: "1rem", borderRight: "2px solid #2e4d3a" }}>
+            <div
+              style={{
+                flex: 1,
+                paddingRight: "1rem",
+                borderRight: "1px dotted #2e4d3a",
+                boxSizing: "border-box",
+              }}
+            >
               <strong>Questions</strong>
               <p>{leftTabs[leftIndex].content.question}</p>
             </div>
-            <div style={{ flex: 1, paddingLeft: "1rem" }}>
+            <div style={{ flex: 1, paddingLeft: "1rem", boxSizing: "border-box" }}>
               <strong>What it looks like</strong>
               <ul>
                 {leftTabs[leftIndex].content.looksLike.map((item, idx) => (
@@ -183,18 +194,19 @@ export default function Box() {
         </div>
 
         {/* Right Column */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          {/* Header area with fixed height for alignment */}
-          <div
-            style={{
-              textAlign: "center",
-              minHeight: headerHeight,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <h2>Understanding Performance</h2>
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            zIndex: 3,
+            padding: "0 10px",
+            boxSizing: "border-box",
+          }}
+        >
+          {/* Header area, aligned from the top */}
+          <div style={{ textAlign: "center", minHeight: headerHeight }}>
+            <h2 style={{ marginTop: 0 }}>Understanding Performance</h2>
             <p>
               Performance considers results against current goals, as a measure of delivery over a
               period of time…
@@ -250,13 +262,22 @@ export default function Box() {
               marginTop: "1rem",
               display: "flex",
               gap: "2rem",
+              width: "100%",
+              boxSizing: "border-box",
             }}
           >
-            <div style={{ flex: 1, paddingRight: "1rem", borderRight: "2px solid #2e4d3a" }}>
+            <div
+              style={{
+                flex: 1,
+                paddingRight: "1rem",
+                borderRight: "1px dotted #2e4d3a",
+                boxSizing: "border-box",
+              }}
+            >
               <strong>What it means</strong>
               <p>{rightTabs[rightIndex].content.meaning}</p>
             </div>
-            <div style={{ flex: 1, paddingLeft: "1rem" }}>
+            <div style={{ flex: 1, paddingLeft: "1rem", boxSizing: "border-box" }}>
               <strong>What it looks like</strong>
               <ul>
                 {rightTabs[rightIndex].content.looksLike.map((item, idx) => (
