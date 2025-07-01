@@ -59,6 +59,34 @@ export default function Home() {
             height={55}
             className="absolute top-[345px] right-[466px] pointer-events-none z-10"
           />
+          <Image
+            src="/persona-noah.svg"
+            alt="personahh"
+            width={55}
+            height={55}
+            className="absolute top-[345px] right-[666px] pointer-events-none z-10"
+          />
+          <Image
+            src="/persona-cath.svg"
+            alt="personahh"
+            width={55}
+            height={55}
+            className="absolute top-[245px] right-[566px] pointer-events-none z-10"
+          />
+          <Image
+            src="/persona-mel.svg"
+            alt="personahh"
+            width={55}
+            height={55}
+            className="absolute top-[245px] right-[366px] pointer-events-none z-10"
+          />
+          <Image
+            src="/persona-sl.svg"
+            alt="personahh"
+            width={55}
+            height={55}
+            className="absolute top-[145px] right-[466px] pointer-events-none z-10"
+          />
         </div>
       </div>
     </div>
