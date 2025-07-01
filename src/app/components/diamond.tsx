@@ -4,6 +4,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/app/components/button";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 
 interface GridItem {
   id: string;
@@ -177,502 +178,510 @@ export default function Diamond() {
   };
 
   return (
-    <div className="min-h-screen  p-4 sm:p-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex flex-col items-center justify-center -rotate-45">
-          <div className="flex items-center gap-2 sm:gap-4 relative">
-            {/* Orange SVG - Left side */}
-            <div
-              className="absolute left-30 -top-50 transform -translate-y-1/2 cursor-pointer transition-transform duration-200 hover:scale-125 z-20 rotate-45"
-              onMouseEnter={() => handleSvgHover("orange")}
-              onMouseLeave={handleSvgLeave}
-              onClick={() => handleSvgClick("orange")}
-            >
-              <Image
-                src="/orange.svg"
-                alt="Orange icon"
-                width={60}
-                height={60}
-                className="opacity-80"
-              />
-            </div>
-
-            {/* Blue SVG - Top right */}
-            <div
-              className="absolute top-50 -right-60 cursor-pointer transition-transform duration-200 hover:scale-125 z-20 rotate-45"
-              onMouseEnter={() => handleSvgHover("blue")}
-              onMouseLeave={handleSvgLeave}
-              onClick={() => handleSvgClick("blue")}
-            >
-              <Image
-                src="/blue.svg"
-                alt="Blue icon"
-                width={60}
-                height={60}
-                className="opacity-80"
-              />
-            </div>
-
-            {/* Green SVG - Bottom right */}
-            <div
-              className="absolute -bottom-50 right-30 cursor-pointer transition-transform duration-200 hover:scale-125 z-20 rotate-45"
-              onMouseEnter={() => handleSvgHover("green")}
-              onMouseLeave={handleSvgLeave}
-              onClick={() => handleSvgClick("green")}
-            >
-              <Image
-                src="/green.svg"
-                alt="Green icon"
-                width={60}
-                height={60}
-                className="opacity-80"
-              />
-            </div>
-
-            {/* Potential label on the left with arrow */}
-            <div className="flex flex-col items-center justify-center w-[50px] z-20 mt--7 ">
-              <div className="flex items-center gap-2 transform rotate-90">
-                <Image
-                  src="/arrow.svg"
-                  alt="arrow-right"
-                  width={30}
-                  height={24}
-                  className="-rotate-135 mr-4"
-                />
-                <span className="text-[24px] font-semibold text-white whitespace-nowrap mr-[60px]">
-                  POTENTIAL
-                </span>
-              </div>
-            </div>
-
-            {/* Main grid container */}
-            <div className="relative">
-              {/* Diamond background - positioned behind and slightly larger */}
-              <div className="absolute inset-0 flex items-center justify-center z-0">
-                <Image
-                  src="/dia-bg.svg"
-                  alt="Diamond background"
-                  width={750}
-                  height={750}
-                  className="max-w-[750px] -rotate-45"
-                />
-              </div>
-
-              {/* Grid with drop shadow */}
+    <>
+      <div className="min-h-screen p-4 sm:p-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col items-center justify-center -rotate-45">
+            <div className="flex items-center gap-2 sm:gap-4 relative">
+              {/* Orange SVG - Left side */}
               <div
-                className="relative z-10 flex flex-col rounded-2xl overflow-hidden "
-                style={{
-                  filter: "drop-shadow(0px 0px 3px #FFED00)",
-                }}
+                className="absolute left-30 -top-50 transform -translate-y-1/2 cursor-pointer transition-transform duration-200 hover:scale-125 z-20 rotate-45"
+                onMouseEnter={() => handleSvgHover("orange")}
+                onMouseLeave={handleSvgLeave}
+                onClick={() => handleSvgClick("orange")}
               >
-                {/* Performance labels + Main 3x3 grid */}
-                <div className="flex">
-                  {/* Performance labels column (15px wide) */}
-                  <div className="flex flex-col ">
-                    <div
-                      className="w-7 h-28 sm:h-32 lg:h-36 flex items-center justify-center font-medium text-black bg-white"
-                      style={{ fontSize: "14px" }}
-                    >
-                      <span className="transform rotate-90 whitespace-nowrap">Step Change</span>
-                    </div>
-                    <div
-                      className="w-7 h-28 sm:h-32 lg:h-36 flex items-center justify-center font-medium text-black bg-white"
-                      style={{ fontSize: "14px" }}
-                    >
-                      <span className="transform rotate-90 whitespace-nowrap">Future Growth</span>
-                    </div>
-                    <div
-                      className="w-7 h-28 sm:h-32 lg:h-36 flex items-center justify-center font-medium text-black bg-white rounded-bl-xl"
-                      style={{ fontSize: "14px" }}
-                    >
-                      <span className="transform rotate-90 whitespace-nowrap">Lateral Mover</span>
-                    </div>
-                  </div>
+                <Image
+                  src="/orange.svg"
+                  alt="Orange icon"
+                  width={60}
+                  height={60}
+                  className="opacity-80"
+                />
+              </div>
 
-                  {/* Main 3x3 grid */}
-                  <div className="grid grid-cols-3 gap-0 diagonal-font">
-                    {/* First row: Excelling */}
-                    {gridData.slice(2, 3).map((item) => (
-                      <div
-                        key={item.id}
-                        className={`
-                        ${item.color}
-                        w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
-                        flex items-center justify-center
-                        text-white font-semibold text-center p-2 sm:p-3
-                        transition-all duration-200 ease-in-out
-                        hover-slow-return diagonal-font
-                        ${
-                          (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
-                          (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
-                          (hoveredSvg === "green" && item.color === "bg-custom-green")
-                            ? "svg-hover-effect"
-                            : ""
-                        }
-                      `}
-                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <span className="text-xs sm:text-sm leading-tight transform rotate-45">
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
-                    {gridData.slice(5, 6).map((item) => (
-                      <div
-                        key={item.id}
-                        className={`
-                        ${item.color}
-                        w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
-                        flex items-center justify-center
-                        text-white font-semibold text-center p-2 sm:p-3
-                        transition-all duration-200 ease-in-out
-                        hover-slow-return diagonal-font
-                        ${
-                          (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
-                          (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
-                          (hoveredSvg === "green" && item.color === "bg-custom-green")
-                            ? "svg-hover-effect"
-                            : ""
-                        }
-                      `}
-                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <span className="text-xs sm:text-sm leading-tight transform rotate-45">
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
-                    {gridData.slice(8, 9).map((item) => (
-                      <div
-                        key={item.id}
-                        className={`
-                        ${item.color}
-                        w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
-                        flex items-center justify-center
-                        text-white font-semibold text-center p-2 sm:p-3
-                        transition-all duration-200 ease-in-out
-                        hover-slow-return diagonal-font
-                        ${
-                          (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
-                          (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
-                          (hoveredSvg === "green" && item.color === "bg-custom-green")
-                            ? "svg-hover-effect"
-                            : ""
-                        }
-                      `}
-                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <span className="text-xs sm:text-sm leading-tight transform rotate-45">
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
+              {/* Blue SVG - Top right */}
+              <div
+                className="absolute top-50 -right-60 cursor-pointer transition-transform duration-200 hover:scale-125 z-20 rotate-45"
+                onMouseEnter={() => handleSvgHover("blue")}
+                onMouseLeave={handleSvgLeave}
+                onClick={() => handleSvgClick("blue")}
+              >
+                <Image
+                  src="/blue.svg"
+                  alt="Blue icon"
+                  width={60}
+                  height={60}
+                  className="opacity-80"
+                />
+              </div>
 
-                    {/* Second row: Delivering */}
-                    {gridData.slice(1, 2).map((item) => (
-                      <div
-                        key={item.id}
-                        className={`
-                        ${item.color}
-                        w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
-                        flex items-center justify-center
-                        text-white font-semibold text-center p-2 sm:p-3
-                        transition-all duration-200 ease-in-out
-                        hover-slow-return diagonal-font
-                        ${
-                          (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
-                          (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
-                          (hoveredSvg === "green" && item.color === "bg-custom-green")
-                            ? "svg-hover-effect"
-                            : ""
-                        }
-                      `}
-                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <span className="text-xs sm:text-sm leading-tight transform rotate-45">
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
-                    {gridData.slice(4, 5).map((item) => (
-                      <div
-                        key={item.id}
-                        className={`
-                        ${item.color}
-                        w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
-                        flex items-center justify-center
-                        text-white font-semibold text-center p-2 sm:p-3
-                        transition-all duration-200 ease-in-out
-                        hover-slow-return diagonal-font
-                        ${
-                          (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
-                          (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
-                          (hoveredSvg === "green" && item.color === "bg-custom-green")
-                            ? "svg-hover-effect"
-                            : ""
-                        }
-                      `}
-                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <span className="text-xs sm:text-sm leading-tight transform rotate-45">
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
-                    {gridData.slice(7, 8).map((item) => (
-                      <div
-                        key={item.id}
-                        className={`
-                        ${item.color}
-                        w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
-                        flex items-center justify-center
-                        text-white font-semibold text-center p-2 sm:p-3
-                        transition-all duration-200 ease-in-out
-                        hover-slow-return diagonal-font
-                        ${
-                          (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
-                          (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
-                          (hoveredSvg === "green" && item.color === "bg-custom-green")
-                            ? "svg-hover-effect"
-                            : ""
-                        }
-                      `}
-                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <span className="text-xs sm:text-sm leading-tight transform rotate-45">
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
+              {/* Green SVG - Bottom right */}
+              <div
+                className="absolute -bottom-50 right-30 cursor-pointer transition-transform duration-200 hover:scale-125 z-20 rotate-45"
+                onMouseEnter={() => handleSvgHover("green")}
+                onMouseLeave={handleSvgLeave}
+                onClick={() => handleSvgClick("green")}
+              >
+                <Image
+                  src="/green.svg"
+                  alt="Green icon"
+                  width={60}
+                  height={60}
+                  className="opacity-80"
+                />
+              </div>
 
-                    {/* Third row: Developing */}
-                    {gridData.slice(0, 1).map((item) => (
-                      <div
-                        key={item.id}
-                        className={`
-                        ${item.color}
-                        w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
-                        flex items-center justify-center
-                        text-white font-semibold text-center p-2 sm:p-3
-                        transition-all duration-200 ease-in-out
-                        hover-slow-return diagonal-font
-                        ${
-                          (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
-                          (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
-                          (hoveredSvg === "green" && item.color === "bg-custom-green")
-                            ? "svg-hover-effect"
-                            : ""
-                        }
-                      `}
-                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <span className="text-xs sm:text-sm leading-tight transform rotate-45">
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
-                    {gridData.slice(3, 4).map((item) => (
-                      <div
-                        key={item.id}
-                        className={`
-                        ${item.color}
-                        w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
-                        flex items-center justify-center
-                        text-white font-semibold text-center p-2 sm:p-3
-                        transition-all duration-200 ease-in-out
-                        hover-slow-return diagonal-font
-                        ${
-                          (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
-                          (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
-                          (hoveredSvg === "green" && item.color === "bg-custom-green")
-                            ? "svg-hover-effect"
-                            : ""
-                        }
-                      `}
-                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <span className="text-xs sm:text-sm leading-tight transform rotate-45">
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
-                    {gridData.slice(6, 7).map((item) => (
-                      <div
-                        key={item.id}
-                        className={`
-                        ${item.color}
-                        w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
-                        flex items-center justify-center
-                        text-white font-semibold text-center p-2 sm:p-3
-                        transition-all duration-200 ease-in-out
-                        hover-slow-return diagonal-font
-                        ${
-                          (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
-                          (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
-                          (hoveredSvg === "green" && item.color === "bg-custom-green")
-                            ? "svg-hover-effect"
-                            : ""
-                        }
-                      `}
-                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <span className="text-xs sm:text-sm leading-tight transform rotate-45">
-                          {item.title}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+              {/* Potential label on the left with arrow */}
+              <div className="flex flex-col items-center justify-center w-[50px] z-20 mt--7 ">
+                <div className="flex items-center gap-2 transform rotate-90">
+                  <Image
+                    src="/arrow.svg"
+                    alt="arrow-right"
+                    width={30}
+                    height={24}
+                    className="-rotate-135 mr-4"
+                  />
+                  <span className="text-[24px] font-semibold text-white whitespace-nowrap mr-[60px]">
+                    POTENTIAL
+                  </span>
+                </div>
+              </div>
+
+              {/* Main grid container */}
+              <div className="relative">
+                {/* Diamond background - positioned behind and slightly larger */}
+                <div className="absolute inset-0 flex items-center justify-center z-0">
+                  <Image
+                    src="/dia-bg.svg"
+                    alt="Diamond background"
+                    width={750}
+                    height={750}
+                    className="max-w-[750px] -rotate-45"
+                  />
                 </div>
 
-                {/* Potential labels at bottom (15px tall) */}
-                <div className="flex ml-7">
-                  <div
-                    className="w-28 sm:w-32 lg:w-36 h-7 flex items-center justify-center font-medium text-black bg-white rounded-bl-xl"
-                    style={{ fontSize: "14px" }}
-                  >
-                    Developing
+                {/* Grid with drop shadow */}
+                <div
+                  className="relative z-10 flex flex-col rounded-2xl overflow-hidden "
+                  style={{
+                    filter: "drop-shadow(0px 0px 3px #FFED00)",
+                  }}
+                >
+                  {/* Performance labels + Main 3x3 grid */}
+                  <div className="flex">
+                    {/* Performance labels column (15px wide) */}
+                    <div className="flex flex-col ">
+                      <div
+                        className="w-7 h-28 sm:h-32 lg:h-36 flex items-center justify-center font-medium text-black bg-white"
+                        style={{ fontSize: "14px" }}
+                      >
+                        <span className="transform rotate-90 whitespace-nowrap">Step Change</span>
+                      </div>
+                      <div
+                        className="w-7 h-28 sm:h-32 lg:h-36 flex items-center justify-center font-medium text-black bg-white"
+                        style={{ fontSize: "14px" }}
+                      >
+                        <span className="transform rotate-90 whitespace-nowrap">Future Growth</span>
+                      </div>
+                      <div
+                        className="w-7 h-28 sm:h-32 lg:h-36 flex items-center justify-center font-medium text-black bg-white rounded-bl-xl"
+                        style={{ fontSize: "14px" }}
+                      >
+                        <span className="transform rotate-90 whitespace-nowrap">Lateral Mover</span>
+                      </div>
+                    </div>
+
+                    {/* Main 3x3 grid */}
+                    <div className="grid grid-cols-3 gap-0 diagonal-font">
+                      {/* First row: Excelling */}
+                      {gridData.slice(2, 3).map((item) => (
+                        <div
+                          key={item.id}
+                          className={`
+                          ${item.color}
+                          w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
+                          flex items-center justify-center
+                          text-white font-semibold text-center p-2 sm:p-3
+                          transition-all duration-200 ease-in-out
+                          hover-slow-return diagonal-font
+                          ${
+                            (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
+                            (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
+                            (hoveredSvg === "green" && item.color === "bg-custom-green")
+                              ? "svg-hover-effect"
+                              : ""
+                          }
+                        `}
+                          style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          <span className="text-xs sm:text-sm leading-tight transform rotate-45">
+                            {item.title}
+                          </span>
+                        </div>
+                      ))}
+                      {gridData.slice(5, 6).map((item) => (
+                        <div
+                          key={item.id}
+                          className={`
+                          ${item.color}
+                          w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
+                          flex items-center justify-center
+                          text-white font-semibold text-center p-2 sm:p-3
+                          transition-all duration-200 ease-in-out
+                          hover-slow-return diagonal-font
+                          ${
+                            (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
+                            (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
+                            (hoveredSvg === "green" && item.color === "bg-custom-green")
+                              ? "svg-hover-effect"
+                              : ""
+                          }
+                        `}
+                          style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          <span className="text-xs sm:text-sm leading-tight transform rotate-45">
+                            {item.title}
+                          </span>
+                        </div>
+                      ))}
+                      {gridData.slice(8, 9).map((item) => (
+                        <div
+                          key={item.id}
+                          className={`
+                          ${item.color}
+                          w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
+                          flex items-center justify-center
+                          text-white font-semibold text-center p-2 sm:p-3
+                          transition-all duration-200 ease-in-out
+                          hover-slow-return diagonal-font
+                          ${
+                            (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
+                            (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
+                            (hoveredSvg === "green" && item.color === "bg-custom-green")
+                              ? "svg-hover-effect"
+                              : ""
+                          }
+                        `}
+                          style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          <span className="text-xs sm:text-sm leading-tight transform rotate-45">
+                            {item.title}
+                          </span>
+                        </div>
+                      ))}
+
+                      {/* Second row: Delivering */}
+                      {gridData.slice(1, 2).map((item) => (
+                        <div
+                          key={item.id}
+                          className={`
+                          ${item.color}
+                          w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
+                          flex items-center justify-center
+                          text-white font-semibold text-center p-2 sm:p-3
+                          transition-all duration-200 ease-in-out
+                          hover-slow-return diagonal-font
+                          ${
+                            (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
+                            (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
+                            (hoveredSvg === "green" && item.color === "bg-custom-green")
+                              ? "svg-hover-effect"
+                              : ""
+                          }
+                        `}
+                          style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          <span className="text-xs sm:text-sm leading-tight transform rotate-45">
+                            {item.title}
+                          </span>
+                        </div>
+                      ))}
+                      {gridData.slice(4, 5).map((item) => (
+                        <div
+                          key={item.id}
+                          className={`
+                          ${item.color}
+                          w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
+                          flex items-center justify-center
+                          text-white font-semibold text-center p-2 sm:p-3
+                          transition-all duration-200 ease-in-out
+                          hover-slow-return diagonal-font
+                          ${
+                            (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
+                            (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
+                            (hoveredSvg === "green" && item.color === "bg-custom-green")
+                              ? "svg-hover-effect"
+                              : ""
+                          }
+                        `}
+                          style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          <span className="text-xs sm:text-sm leading-tight transform rotate-45">
+                            {item.title}
+                          </span>
+                        </div>
+                      ))}
+                      {gridData.slice(7, 8).map((item) => (
+                        <div
+                          key={item.id}
+                          className={`
+                          ${item.color}
+                          w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
+                          flex items-center justify-center
+                          text-white font-semibold text-center p-2 sm:p-3
+                          transition-all duration-200 ease-in-out
+                          hover-slow-return diagonal-font
+                          ${
+                            (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
+                            (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
+                            (hoveredSvg === "green" && item.color === "bg-custom-green")
+                              ? "svg-hover-effect"
+                              : ""
+                          }
+                        `}
+                          style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          <span className="text-xs sm:text-sm leading-tight transform rotate-45">
+                            {item.title}
+                          </span>
+                        </div>
+                      ))}
+
+                      {/* Third row: Developing */}
+                      {gridData.slice(0, 1).map((item) => (
+                        <div
+                          key={item.id}
+                          className={`
+                          ${item.color}
+                          w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
+                          flex items-center justify-center
+                          text-white font-semibold text-center p-2 sm:p-3
+                          transition-all duration-200 ease-in-out
+                          hover-slow-return diagonal-font
+                          ${
+                            (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
+                            (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
+                            (hoveredSvg === "green" && item.color === "bg-custom-green")
+                              ? "svg-hover-effect"
+                              : ""
+                          }
+                        `}
+                          style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          <span className="text-xs sm:text-sm leading-tight transform rotate-45">
+                            {item.title}
+                          </span>
+                        </div>
+                      ))}
+                      {gridData.slice(3, 4).map((item) => (
+                        <div
+                          key={item.id}
+                          className={`
+                          ${item.color}
+                          w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
+                          flex items-center justify-center
+                          text-white font-semibold text-center p-2 sm:p-3
+                          transition-all duration-200 ease-in-out
+                          hover-slow-return diagonal-font
+                          ${
+                            (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
+                            (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
+                            (hoveredSvg === "green" && item.color === "bg-custom-green")
+                              ? "svg-hover-effect"
+                              : ""
+                          }
+                        `}
+                          style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          <span className="text-xs sm:text-sm leading-tight transform rotate-45">
+                            {item.title}
+                          </span>
+                        </div>
+                      ))}
+                      {gridData.slice(6, 7).map((item) => (
+                        <div
+                          key={item.id}
+                          className={`
+                          ${item.color}
+                          w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 cursor-pointer
+                          flex items-center justify-center
+                          text-white font-semibold text-center p-2 sm:p-3
+                          transition-all duration-200 ease-in-out
+                          hover-slow-return diagonal-font
+                          ${
+                            (hoveredSvg === "orange" && item.color === "bg-custom-orange") ||
+                            (hoveredSvg === "blue" && item.color === "bg-custom-blue") ||
+                            (hoveredSvg === "green" && item.color === "bg-custom-green")
+                              ? "svg-hover-effect"
+                              : ""
+                          }
+                        `}
+                          style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          <span className="text-xs sm:text-sm leading-tight transform rotate-45">
+                            {item.title}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div
-                    className="w-28 sm:w-32 lg:w-36 h-7 flex items-center justify-center font-medium text-black bg-white"
-                    style={{ fontSize: "14px" }}
-                  >
-                    Delivering
-                  </div>
-                  <div
-                    className="w-28 sm:w-32 lg:w-36 h-7 flex items-center justify-center font-medium text-black bg-white"
-                    style={{ fontSize: "14px" }}
-                  >
-                    Excelling
+
+                  {/* Potential labels at bottom (15px tall) */}
+                  <div className="flex ml-7">
+                    <div
+                      className="w-28 sm:w-32 lg:w-36 h-7 flex items-center justify-center font-medium text-black bg-white rounded-bl-xl"
+                      style={{ fontSize: "14px" }}
+                    >
+                      Developing
+                    </div>
+                    <div
+                      className="w-28 sm:w-32 lg:w-36 h-7 flex items-center justify-center font-medium text-black bg-white"
+                      style={{ fontSize: "14px" }}
+                    >
+                      Delivering
+                    </div>
+                    <div
+                      className="w-28 sm:w-32 lg:w-36 h-7 flex items-center justify-center font-medium text-black bg-white"
+                      style={{ fontSize: "14px" }}
+                    >
+                      Excelling
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Performance label at the bottom with arrow */}
-          <div className="mt-4 sm:mt-6 flex items-center gap-2" style={{ marginLeft: "120px" }}>
-            <span className="text-[24px] font-semibold text-white">PERFORMANCE</span>
-            <Image
-              src="/arrow.svg"
-              alt="arrow-right"
-              width={30}
-              height={24}
-              className="rotate-45 ml-4"
-            />
+            {/* Performance label at the bottom with arrow */}
+            <div className="mt-4 sm:mt-6 flex items-center gap-2" style={{ marginLeft: "120px" }}>
+              <span className="text-[24px] font-semibold text-white">PERFORMANCE</span>
+              <Image
+                src="/arrow.svg"
+                alt="arrow-right"
+                width={30}
+                height={24}
+                className="rotate-45 ml-4"
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Modal */}
-      {selectedItem && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-          onClick={closeModal}
-        >
+      {/* Modal using portal to render at document body */}
+      {selectedItem &&
+        typeof window !== "undefined" &&
+        createPortal(
           <div
-            className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4"
+            onClick={closeModal}
           >
-            <Button
-              variant="ghost"
-              size="sm"
-              className="absolute top-3 right-3 hover:bg-slate-100 rounded-full"
-              onClick={closeModal}
+            <div
+              className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X className="h-4 w-4" />
-            </Button>
-
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-slate-800 mb-3">{selectedItem.title}</h2>
-              <div className="flex flex-wrap gap-2 text-sm">
-                <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">
-                  {selectedItem.potential}
-                </span>
-                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full font-medium">
-                  {selectedItem.performance}
-                </span>
-              </div>
-            </div>
-            <p className="text-slate-700 leading-relaxed mb-1 ">
-              <strong>{selectedItem.subtitle}</strong>
-            </p>
-            <p className="text-slate-700 leading-relaxed mb-6">{selectedItem.description}</p>
-
-            <div className="flex justify-end">
               <Button
+                variant="ghost"
+                size="sm"
+                className="absolute top-3 right-3 hover:bg-slate-100 rounded-full"
                 onClick={closeModal}
-                className="bg-gradient-to-r bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-2 rounded-lg transition-all duration-200 cursor-pointer"
               >
-                Close
+                <X className="h-4 w-4" />
               </Button>
-            </div>
-          </div>
-        </div>
-      )}
 
-      {/* SVG Category Modal */}
-      {selectedSvgCategory && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-          onClick={closeSvgModal}
-        >
-          <div
-            className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Button
-              variant="ghost"
-              size="sm"
-              className="absolute top-3 right-3 hover:bg-slate-100 rounded-full"
-              onClick={closeSvgModal}
-            >
-              <X className="h-4 w-4" />
-            </Button>
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-slate-800 mb-3">{selectedItem.title}</h2>
+                <div className="flex flex-wrap gap-2 text-sm">
+                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-medium">
+                    {selectedItem.potential}
+                  </span>
+                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full font-medium">
+                    {selectedItem.performance}
+                  </span>
+                </div>
+              </div>
+              <p className="text-slate-700 leading-relaxed mb-1 ">
+                <strong>{selectedItem.subtitle}</strong>
+              </p>
+              <p className="text-slate-700 leading-relaxed mb-6">{selectedItem.description}</p>
 
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-slate-800 mb-3">
-                {svgCategories[selectedSvgCategory].title}
-              </h2>
-              <div className="flex gap-2 text-sm">
-                <span
-                  className={`px-3 py-1 rounded-full font-medium ${
-                    selectedSvgCategory === "orange"
-                      ? "bg-custom-orange-light text-custom-orange-dark"
-                      : selectedSvgCategory === "blue"
-                      ? "bg-custom-blue-light text-custom-blue-dark"
-                      : "bg-custom-green-light text-custom-green-dark"
-                  }`}
+              <div className="flex justify-end">
+                <Button
+                  onClick={closeModal}
+                  className="bg-gradient-to-r bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-2 rounded-lg transition-all duration-200 cursor-pointer"
                 >
-                  {selectedSvgCategory.charAt(0).toUpperCase() + selectedSvgCategory.slice(1)}{" "}
-                  Category
-                </span>
+                  Close
+                </Button>
               </div>
             </div>
+          </div>,
+          document.body
+        )}
 
-            <p className="text-slate-700 leading-relaxed mb-6">
-              {svgCategories[selectedSvgCategory].description}
-            </p>
-
-            <div className="flex justify-end">
+      {/* SVG Category Modal using portal */}
+      {selectedSvgCategory &&
+        typeof window !== "undefined" &&
+        createPortal(
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4"
+            onClick={closeSvgModal}
+          >
+            <div
+              className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300"
+              onClick={(e) => e.stopPropagation()}
+            >
               <Button
+                variant="ghost"
+                size="sm"
+                className="absolute top-3 right-3 hover:bg-slate-100 rounded-full"
                 onClick={closeSvgModal}
-                className="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white px-6 py-2 rounded-lg transition-all duration-200"
               >
-                Close
+                <X className="h-4 w-4" />
               </Button>
+
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-slate-800 mb-3">
+                  {svgCategories[selectedSvgCategory].title}
+                </h2>
+                <div className="flex gap-2 text-sm">
+                  <span
+                    className={`px-3 py-1 rounded-full font-medium ${
+                      selectedSvgCategory === "orange"
+                        ? "bg-custom-orange-light text-custom-orange-dark"
+                        : selectedSvgCategory === "blue"
+                        ? "bg-custom-blue-light text-custom-blue-dark"
+                        : "bg-custom-green-light text-custom-green-dark"
+                    }`}
+                  >
+                    {selectedSvgCategory.charAt(0).toUpperCase() + selectedSvgCategory.slice(1)}{" "}
+                    Category
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-slate-700 leading-relaxed mb-6">
+                {svgCategories[selectedSvgCategory].description}
+              </p>
+
+              <div className="flex justify-end">
+                <Button
+                  onClick={closeSvgModal}
+                  className="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white px-6 py-2 rounded-lg transition-all duration-200"
+                >
+                  Close
+                </Button>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
 
       <style jsx>{`
         .bg-custom-blue {
@@ -714,6 +723,6 @@ export default function Diamond() {
           transition: all 0.2s ease-in-out;
         }
       `}</style>
-    </div>
+    </>
   );
 }
