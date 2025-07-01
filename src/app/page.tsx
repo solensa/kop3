@@ -4,7 +4,7 @@ import Box from "./components/box";
 
 export default function Home() {
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-black min-h-screen overflow-hidden">
       <div className="min-h-screen bg-black text-white flex flex-col items-center px-4 py-12 relative">
         <div className="flex items-center gap-3 mb-6 z-10">
           <Image src="/dia-logo.svg" alt="logo" width={60} height={60} />
