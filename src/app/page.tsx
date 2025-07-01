@@ -17,7 +17,7 @@ export default function Home() {
         </p>
 
         {/* Fixed position container for all elements */}
-        <div className="relative w-[1200px] h-[800px] mx-auto">
+        <div className="relative w-[1200px] h-[800px] mx-auto left-[-36px]">
           {/* Diamond positioned at center */}
           <div className="absolute left-1/2 transform -translate-x-1/2  z-10">
             <Diamond />
