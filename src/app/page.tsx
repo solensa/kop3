@@ -4,7 +4,7 @@ import Box from "./components/box";
 
 export default function Home() {
   return (
-    <div className="bg-black">
+    <div className="bg-black h-[2000px]">
       <div className="min-h-screen bg-black text-white flex flex-col items-center px-4 py-12 relative">
         <div className="flex items-center gap-3 mb-6 z-10">
           <Image src="/dia-logo.svg" alt="logo" width={60} height={60} />
@@ -15,31 +15,44 @@ export default function Home() {
           people need support, and ​who would benefit from a development.​ ​Benchmark your views
           with peers. ​
         </p>
-        <Diamond />
-        <Image
-          src="/dia-wave.svg"
-          alt="diamond"
-          width={850}
-          height={900}
-          className="absolute bottom-95 pointer-events-none"
-        />
-      </div>
-      <div className="  text-white flex flex-col items-center px-4 py-12 relative  mt-[-315px]">
-        <Image
-          src="/antennae1.svg"
-          alt="diamond"
-          width={60}
-          height={60}
-          className="absolute -top-25 left-120 pointer-events-none"
-        />
-        <Image
-          src="/antennae2.svg"
-          alt="diamond"
-          width={60}
-          height={60}
-          className="absolute -top-25 right-120 pointer-events-none"
-        />
-        <Box />
+
+        {/* Fixed position container for all elements */}
+        <div className="relative w-[1200px] h-[800px] mx-auto">
+          {/* Diamond positioned at center */}
+          <div className="absolute left-1/2 transform -translate-x-1/2  z-10">
+            <Diamond />
+          </div>
+
+          {/* Wave image at fixed position */}
+          <Image
+            src="/dia-wave.svg"
+            alt="diamond"
+            width={850}
+            height={900}
+            className="absolute bottom-[300px] left-1/2 transform -translate-x-1/2 pointer-events-none z-20"
+          />
+
+          {/* Box positioned to overlap diamond */}
+          <div className="absolute top-[620px] left-1/2 transform -translate-x-1/2 z-5 w-[1060px]">
+            <Box />
+          </div>
+
+          {/* Antennae images at fixed positions */}
+          <Image
+            src="/antennae1.svg"
+            alt="antennae1"
+            width={60}
+            height={60}
+            className="absolute top-[470px] left-[320px] pointer-events-none"
+          />
+          <Image
+            src="/antennae2.svg"
+            alt="antennae2"
+            width={60}
+            height={60}
+            className="absolute top-[470px] right-[320px] pointer-events-none"
+          />
+        </div>
       </div>
     </div>
   );
