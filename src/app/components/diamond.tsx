@@ -126,7 +126,9 @@ const gridData: GridItem[] = [
 export default function Diamond() {
   const [selectedItem, setSelectedItem] = useState<GridItem | null>(null);
   const [hoveredSvg, setHoveredSvg] = useState<string | null>(null);
-  const [selectedSvgCategory, setSelectedSvgCategory] = useState<string | null>(null);
+  const [selectedSvgCategory, setSelectedSvgCategory] = useState<
+    "orange" | "blue" | "green" | null
+  >(null);
 
   // Add SVG category data
   const svgCategories = {
@@ -166,7 +168,7 @@ export default function Diamond() {
     setHoveredSvg(null);
   };
 
-  const handleSvgClick = (category: string) => {
+  const handleSvgClick = (category: "orange" | "blue" | "green") => {
     setSelectedSvgCategory(category);
   };
 
