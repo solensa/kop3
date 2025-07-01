@@ -110,14 +110,14 @@ export default function Box() {
           style={{
             position: "absolute",
             left: "50%",
-            top: "-30px", // extends above the box
+            top: "-80px", // extends above the box
             bottom: 0,
             transform: "translateX(-50%)",
             width: 0,
             borderLeft: "1px dotted #6aff7f",
             zIndex: 2,
             pointerEvents: "none",
-            height: "calc(100% + 30px)",
+            height: "calc(100% + 80px)",
           }}
         />
         {/* Left Column */}
