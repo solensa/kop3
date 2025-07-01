@@ -581,7 +581,7 @@ export default function Diamond() {
         createPortal(
           <div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center z-[9999] p-4"
-            style={{ paddingTop: "400px", paddingLeft: "80px" }}
+            style={{ paddingTop: "400px" }}
             onClick={closeModal}
           >
             <div
@@ -632,7 +632,7 @@ export default function Diamond() {
         createPortal(
           <div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center z-[9999] p-4"
-            style={{ paddingTop: "400px", paddingLeft: "80px" }}
+            style={{ paddingTop: "400px" }}
             onClick={closeSvgModal}
           >
             <div

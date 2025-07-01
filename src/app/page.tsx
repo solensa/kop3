@@ -52,6 +52,13 @@ export default function Home() {
             height={60}
             className="absolute top-[470px] right-[320px] pointer-events-none"
           />
+          <Image
+            src="/persona-hh.svg"
+            alt="personahh"
+            width={55}
+            height={55}
+            className="absolute top-[345px] right-[466px] pointer-events-none z-10"
+          />
         </div>
       </div>
     </div>
