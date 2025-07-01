@@ -580,11 +580,12 @@ export default function Diamond() {
         typeof window !== "undefined" &&
         createPortal(
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center z-[9999] p-4"
+            style={{ paddingTop: "200px" }}
             onClick={closeModal}
           >
             <div
-              className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300"
+              className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300 h-fit"
               onClick={(e) => e.stopPropagation()}
             >
               <Button
@@ -630,11 +631,12 @@ export default function Diamond() {
         typeof window !== "undefined" &&
         createPortal(
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center z-[9999] p-4"
+            style={{ paddingTop: "200px" }}
             onClick={closeSvgModal}
           >
             <div
-              className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300"
+              className="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300 h-fit"
               onClick={(e) => e.stopPropagation()}
             >
               <Button
