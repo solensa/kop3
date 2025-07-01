@@ -16,6 +16,11 @@ interface GridItem {
   description: string;
 }
 
+// Add proper type for CSS custom properties
+interface CustomCSSProperties extends React.CSSProperties {
+  "--hover-color"?: string;
+}
+
 const gridData: GridItem[] = [
   {
     id: "lateral-developing",
@@ -303,7 +308,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor } as any}
+                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -329,7 +334,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor } as any}
+                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -355,7 +360,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor } as any}
+                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -383,7 +388,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor } as any}
+                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -409,7 +414,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor } as any}
+                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -435,7 +440,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor } as any}
+                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -463,7 +468,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor } as any}
+                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -489,7 +494,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor } as any}
+                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
@@ -515,7 +520,7 @@ export default function Diamond() {
                             : ""
                         }
                       `}
-                        style={{ "--hover-color": item.hoverColor } as any}
+                        style={{ "--hover-color": item.hoverColor } as CustomCSSProperties}
                         onClick={() => handleItemClick(item)}
                       >
                         <span className="text-xs sm:text-sm leading-tight transform rotate-45">
