@@ -17,7 +17,7 @@ const leftTabs = [
     },
   },
   {
-    label: "AGILITY",
+    label: "ABILITY",
     content: {
       question: "Does this person have a strong level of intellectual and emotional ability?",
       looksLike: [
@@ -28,7 +28,7 @@ const leftTabs = [
     },
   },
   {
-    label: "ABILITY",
+    label: "AGILITY",
     content: {
       question:
         "Does this person demonstrate curiosity, learn rapidly, adapt, and apply new knowledge or skills in unfamiliar situations?",
